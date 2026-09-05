@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c9394b25806f542bf1e2ed159b8df4, type: 3}
+  m_Name: 101005_Slingshot_Common
+  m_EditorClassIdentifier: 
+  _itemID: 101005
+  _itemName: "일반 새총"
+  _sprite: {fileID: 0}
+  _outlineSprite: {fileID: 0}
+  _type: 1
+  _canDrop: 1
+  _buyGold: 120
+  _sellGold: 36
+  _description: "돌멩이 같은 탄을 사용하는 가벼운 원거리 무기입니다."
+  _rank: 1
+  _shape:
+    _width: 2
+    _height: 2
+    _shape: 01010101
+  _maxStackCount: 1
+  _weight: 1.2
+  _equipSlot: 1
+  _useMechanic: 0
+  _canHoldInHand: 1
+  _handheldType: 5
+  _maxDurability: 0
+  _requiresIdentification: 0
+  _requiredIntelligence: 0
+  _unidentifiedName: "정체불명의 아이템"
+  _unidentifiedDescription: ""
+  _correctionValue: 0
+  _modelReference:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _worldPrefabOverride:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _mesh: {fileID: 0}
+  _materials: []
+  _statModifiers:
+  - _statType: 10
+    _modifierType: 100
+    _value: 5
+  - _statType: 110
+    _modifierType: 100
+    _value: 2

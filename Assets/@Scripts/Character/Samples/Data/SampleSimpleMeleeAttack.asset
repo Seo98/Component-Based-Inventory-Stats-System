@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86285135fc6e66d46bc9b7048e93e508, type: 3}
+  m_Name: SampleSimpleMeleeAttack
+  m_EditorClassIdentifier: 
+  _legacyPlayerSlot: 0
+  _cooldown: 1.2
+  _executionDelay: 0.35
+  _damageMultiplier: 1
+  _minimumDamage: 1
+  _allowFriendlyFire: 0
+  _hitVolumes:
+  - _shape: 0
+    _localCenter: {x: 0, y: 0, z: 1.3}
+    _localEulerAngles: {x: 0, y: 0, z: 0}
+    _boxHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
+    _radius: 1.05
+    _capsuleHeight: 2.1
+    _capsuleAxis: 1
+  _targetLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _queryTriggerInteraction: 1
