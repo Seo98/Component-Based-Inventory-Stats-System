@@ -48,9 +48,8 @@
 
 > [YouTube에서 데모 영상 보기](https://youtu.be/lBFEAHTD9JI)
 
-#### Screenshots
+### Screenshots
 
-=======
 | Gameplay | Inventory | Combat |
 | --- | --- | --- |
 | <img src="https://github.com/user-attachments/assets/fccd3e44-fb44-4902-ac78-12869e6cbc2b" alt="Gameplay" width="100%"> | <img src="https://github.com/user-attachments/assets/5e0507c2-9947-487c-a34f-ba899d851635" alt="Inventory" width="100%"> | <img src="https://github.com/user-attachments/assets/7ec98896-ccf7-481d-8d48-d1d0d1c97ed2" alt="Combat" width="100%"> |
@@ -102,10 +101,14 @@
 
 ## Future Architecture Considerations
 
-현재 구조는 기능을 작은 컴포넌트로 분리하고, Inspector 참조와 이벤트를 통해 연결합니다. 프로젝트 규모가 커져 컴포넌트 간 의존성과 초기화 순서 관리가 복잡해질 경우 다음 방식을 선택적으로 검토할 수 있습니다.
+현재 구조는 기능을 작은 컴포넌트로 분리하고, Inspector 참조와 이벤트를 통해 연결합니다. 
+프로젝트 규모가 커져 컴포넌트 간 의존성과 초기화 순서 관리가 복잡해질 경우 다음 방식을 선택적으로 검토할 수 있습니다.
 
-- **Dependency Injection:** 인벤토리, 스탯, 전투 서비스의 생성과 연결을 Composition Root에 모아 결합도를 낮추고 테스트 교체를 쉽게 만듭니다. Unity 환경에서는 [VContainer](https://github.com/hadashiA/VContainer) 같은 DI 컨테이너를 후보로 고려할 수 있습니다.
-- **R3:** 체력·스탯·인벤토리 변경처럼 연속적으로 발생하는 이벤트를 반응형 스트림으로 구성하여 UI 갱신과 상태 구독 코드를 단순화할 수 있습니다. 후보 라이브러리로 [Cysharp R3](https://github.com/Cysharp/R3)를 검토할 수 있습니다.
+- **Dependency Injection:** 인벤토리, 스탯, 전투 서비스의 생성과 연결을 Composition Root에 모아 결합도를 낮추고 테스트 교체를 쉽게 만듭니다.
+Unity 환경에서는 [VContainer](https://github.com/hadashiA/VContainer) 같은 DI 컨테이너를 후보로 고려할 수 있습니다.
+
+- **R3:** 체력·스탯·인벤토리 변경처럼 연속적으로 발생하는 이벤트를 반응형 스트림으로 구성하여 UI 갱신과 상태 구독 코드를 단순화할 수 있습니다.
+후보 라이브러리로 [Cysharp R3](https://github.com/Cysharp/R3)를 검토할 수 있습니다.
 
 두 방식은 현재 프로젝트의 필수 의존성이 아니며, 단순한 컴포넌트 연결까지 무조건 대체하기보다 의존 관계와 이벤트 흐름이 실제로 복잡해지는 시점에 필요한 영역부터 도입하는 것을 목표로 합니다.
 
