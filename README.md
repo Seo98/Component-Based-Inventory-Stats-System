@@ -19,21 +19,28 @@
 
 - 따라서 이 저장소는 협업자의 네트워크 커맨드 패턴 구현을 포함하지 않습니다.
 - 그에따라, 네트워크 환경에서의 인벤토리 루팅등 작업등에 대해서는 추가 작업이 필요합니다.
-- 해당 코드로 작업된 예시 결과물 유튜브 링크를 통해 공유합니다
+- 해당 코드로 작업된 예시 결과물을 공유합니다
 
 ## Test Scene
 
 테스트 씬: [Assets/Scenes/TestScenes.unity](Assets/Scenes/TestScenes.unity)
 
-테스트 가능한 항목:
+즉시 테스트 가능한 기능:
 
 - 플레이어 이동
 - 네트워크 환경에서 서버 기준 데미지 처리 및 체력 동기화
 - ScriptableObject를 이용한 범용 캐릭터·오브젝트 스탯 구성
-- 로컬 그리드 인벤토리의 아이템 배치 및 이동
-- 설정된 최대 수량에 따른 동일 아이템 중첩
-- 아이템 드래그 중 `R` 키를 이용한 회전
-- 테스트용 몬스터 루팅 데이터의 간단한 네트워크 동기화
+
+구현 되었으나 테스트를 하려면 별도 추가 작업이 필요한 기능 :
+- 서버 권한 기반 액션 큐, 쿨다운 및 실행 지연
+- Sphere, Box, Capsule을 이용한 다중 히트박스 판정
+- 팀 구분 및 Friendly Fire 설정
+- 서버 기반 몬스터 탐색·회전·근접 공격 AI
+- 순차 실행 및 반복이 가능한 서버 액션 패턴
+- Flat, PercentAdd, PercentMultiply 기반 런타임 스탯 Modifier
+- 스태미나 소비·회복 및 스태미나 기반 점프 제한
+- Raycast와 MVP 구조를 이용한 상호작용 UI 흐름
+- 액션·타격·데미지·체력 변화 디버그 로깅
 
 ## Exmaple Game Youtube Demo & Showcase ScreenShot
 
@@ -43,14 +50,10 @@
 
 #### Screenshots
 
-<<<<<<< Updated upstream
-
-
 =======
 | Gameplay | Inventory | Combat |
 | --- | --- | --- |
 | <img src="https://github.com/user-attachments/assets/fccd3e44-fb44-4902-ac78-12869e6cbc2b" alt="Gameplay" width="100%"> | <img src="https://github.com/user-attachments/assets/5e0507c2-9947-487c-a34f-ba899d851635" alt="Inventory" width="100%"> | <img src="https://github.com/user-attachments/assets/7ec98896-ccf7-481d-8d48-d1d0d1c97ed2" alt="Combat" width="100%"> |
->>>>>>> Stashed changes
 
 ## Editor Tools
 
