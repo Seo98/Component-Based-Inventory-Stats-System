@@ -7,7 +7,7 @@ Essential Library
 - Netcode for GameObjects
 - Addressables
 - Cinemachine
-
+- Multiplayer Play Mode
 
 
 ## Third-Party Attribution
