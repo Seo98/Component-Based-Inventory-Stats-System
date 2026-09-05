@@ -1,58 +1,95 @@
-# Component-Based-Inventory-Stats-System
+<div align="center">
 
-컴포넌트 기반 캐릭터 스탯, 네트워크 전투 및 그리드 인벤토리를 테스트하기 위한 Unity 프로젝트입니다. 
-게임 데이터와 행동 설정은 ScriptableObject 중심으로 구성하며, 반복 작업을 줄이기 위한 전용 에디터 도구를 제공합니다.
+# Component-Based Inventory & Stats
+### Project G · Gameplay Systems Portfolio
 
-## Essential Libraries
+**서버 권한 전투 · 데이터 기반 스탯 · 그리드 인벤토리 · Unity Editor 도구**
 
-### Unity Registry
+Unity 6000.3.12f1 · C# · Netcode for GameObjects · ScriptableObject
 
-- Netcode for GameObjects
-- Addressables
-- Cinemachine
-- Multiplayer Play Mode
+[▶ 팀 프로젝트 데모](https://youtu.be/lBFEAHTD9JI) · [핵심 코드](#code-map) · [테스트 범위](#test-scope) · [에디터 도구](#editor-tools)
 
-## Public Repository Scope
+</div>
 
-- 팀 프로젝트에서는 네트워크 환경의 인벤토리 동기화 작업까지 완료했습니다. 
-- 다만 해당 기능이 의존하는 **네트워크 커맨드 패턴은 다른 작업자가 구현한 코드**이므로, 이 공개 저장소에서는 관련 스크립트를 제외했습니다.
+---
 
-- 따라서 이 저장소는 협업자의 네트워크 커맨드 패턴 구현을 포함하지 않습니다.
-- 그에따라, 네트워크 환경에서의 인벤토리 루팅등 작업등에 대해서는 추가 작업이 필요합니다.
-- 해당 코드로 작업된 예시 결과물을 공유합니다
+Project G에서 사용한 컴포넌트 기반 스탯·전투·인벤토리 관련 코드를 검토할 수 있도록 정리한 Unity 프로젝트입니다. 게임 데이터와 행동 설정은 ScriptableObject로 구성하고, 반복 설정 작업을 위한 전용 에디터 도구를 제공합니다.
 
-## Test Scene
+> **검토 안내**  
+> 실행 빌드 파일은 제공하지 않습니다. 아래 데모·스크린샷으로 팀 프로젝트의 적용 사례를 보고, 코드 링크로 구현 구조를 확인할 수 있습니다. **영상의 팀 프로젝트 전체와 이 공개 저장소의 재현 범위는 다릅니다.**
 
-테스트 씬: [Assets/Scenes/TestScenes.unity](Assets/Scenes/TestScenes.unity)
+## Demo & Showcase
 
-즉시 테스트 가능한 기능:
-
-- 플레이어 이동
-- 네트워크 환경에서 서버 기준 데미지 처리 및 체력 동기화
-- ScriptableObject를 이용한 범용 캐릭터·오브젝트 스탯 구성
-
-구현 되었으나 테스트를 하려면 별도 추가 작업이 필요한 기능 :
-- 서버 권한 기반 액션 큐, 쿨다운 및 실행 지연
-- Sphere, Box, Capsule을 이용한 다중 히트박스 판정
-- 팀 구분 및 Friendly Fire 설정
-- 서버 기반 몬스터 탐색·회전·근접 공격 AI
-- 순차 실행 및 반복이 가능한 서버 액션 패턴
-- Flat, PercentAdd, PercentMultiply 기반 런타임 스탯 Modifier
-- 스태미나 소비·회복 및 스태미나 기반 점프 제한
-- Raycast와 MVP 구조를 이용한 상호작용 UI 흐름
-- 액션·타격·데미지·체력 변화 디버그 로깅
-
-## Exmaple Game Youtube Demo & Showcase ScreenShot
-
-### YouTube Demo
-
-> [YouTube에서 데모 영상 보기](https://youtu.be/lBFEAHTD9JI)
-
-### Screenshots
+[▶ YouTube에서 팀 프로젝트 적용 영상 보기](https://youtu.be/lBFEAHTD9JI)
 
 | Gameplay | Inventory | Combat |
 | --- | --- | --- |
 | <img src="https://github.com/user-attachments/assets/fccd3e44-fb44-4902-ac78-12869e6cbc2b" alt="Gameplay" width="100%"> | <img src="https://github.com/user-attachments/assets/5e0507c2-9947-487c-a34f-ba899d851635" alt="Inventory" width="100%"> | <img src="https://github.com/user-attachments/assets/7ec98896-ccf7-481d-8d48-d1d0d1c97ed2" alt="Combat" width="100%"> |
+
+## Public Repository Scope
+
+- 팀 프로젝트에서는 네트워크 환경의 인벤토리 동기화까지 작업했습니다.
+- 해당 기능이 의존하는 **네트워크 커맨드 패턴은 협업자의 구현**으로, 이 공개 저장소에서는 제외했습니다.
+- 따라서 공개 추출본에서 네트워크 루팅·인벤토리 동기화를 재현하려면 별도 연결 작업이 필요합니다.
+- Grid Inventory에는 **Farrokh Games의 MIT 구현을 수정·확장한 부분**이 포함됩니다. 전체 인벤토리를 독자 구현한 것으로 표시하지 않으며, 원저작권과 라이선스를 아래에 명시합니다.
+
+<a id="code-map"></a>
+
+## 핵심 구현 · Code Map
+
+| 관심 영역 | 먼저 볼 코드 | 확인할 설계 |
+| --- | --- | --- |
+| 액션 실행 | [CharacterActionController](Assets/@Scripts/Character/Actions/CharacterActionController.cs) | 허용 액션·쿨다운·생존 상태 검증, 고정 배열 큐와 실행 지연 |
+| 다중 히트박스 | [ServerHitboxQuery](Assets/@Scripts/Character/Combat/ServerHitboxQuery.cs) | Box·Sphere·Capsule NonAlloc 쿼리, 동일 대상 중복 피해 방지 |
+| 피해·체력 | [DamageReceiver](Assets/@Scripts/Character/Combat/DamageReceiver.cs) / [NetworkCharacterHealth](Assets/@Scripts/Character/Combat/NetworkCharacterHealth.cs) | 피해 수신과 네트워크 체력 상태의 역할 분리 |
+| 장비 상태 | [NetworkCharacterEquipment](Assets/@Scripts/Character/Equipment/NetworkCharacterEquipment.cs) | 서버 쓰기 권한, 아이템 ID·슬롯 검증, 변경 이벤트 |
+| 인벤토리 연결 | [PlayerInventoryEquipmentBridge](Assets/@Scripts/System/GridInventory/PlayerInventoryEquipmentBridge.cs) | 인벤토리와 장비 시스템을 연결하는 경계 |
+| 히트박스 도구 | [HitboxActionAuthoringWindow](Assets/@Tools/Editor/HitboxAction/HitboxActionAuthoringWindow.cs) | Scene 핸들로 판정 범위를 조정하고 Action SO 생성 |
+| 아이템 도구 | [ItemDatabaseEditor](Assets/@Tools/Editor/ItemDatabase/ItemDatabaseEditor.cs) | 아이템 일괄 등록·편집·중복 ID 확인 |
+| 디버깅 | [CombatDebugLogger](Assets/@Scripts/Character/Debug/CombatDebugLogger.cs) | 액션·피격·피해·체력 변경 이벤트 추적 |
+
+### 전투 처리 흐름
+
+```mermaid
+flowchart LR
+    A["플레이어 입력 / 서버 AI"] --> B["CharacterActionController"]
+    D["Action ScriptableObject"] --> B
+    B --> C["서버 검증 · 큐 · 실행 시점"]
+    C --> E["ServerHitboxQuery"]
+    E --> F["DamageReceiver"]
+    F --> G["NetworkCharacterHealth"]
+```
+
+### 설계 의도와 경계
+
+- **공통 컴포넌트:** 플레이어·몬스터의 공통 액션과 피해 처리를 조합할 수 있도록 역할을 분리했습니다.
+- **데이터 중심 설정:** 제공된 히트박스 유형 안에서 공격 범위·쿨다운·피해 설정을 데이터로 조정합니다.
+- **명시적인 연결:** Inspector 참조와 이벤트를 사용합니다. DI 컨테이너·R3는 현재 필수 의존성이 아닙니다.
+- **검증 범위:** 장비 서버 검증은 아이템 ID·슬롯·손에 들 수 있는지에 대한 검사입니다. 실제 인벤토리 보유 여부까지 보장하는 검증은 포함하지 않습니다.
+- **성능 범위:** 물리 쿼리 결과 배열을 재사용합니다. 프로젝트 전체의 GC Alloc 0 또는 특정 성능 향상 수치를 주장하지 않습니다.
+
+<a id="test-scope"></a>
+
+## 테스트 범위 · Editor Review
+
+**기준 버전:** Unity 6000.3.12f1  
+**테스트 씬:** [Assets/Scenes/TestScenes.unity](Assets/Scenes/TestScenes.unity)  
+**패키지 설정:** [Packages/manifest.json](Packages/manifest.json)
+
+Unity Hub에서 저장소 루트를 프로젝트로 추가하고 위 버전으로 연 뒤, 패키지 복원이 완료되면 테스트 씬을 확인합니다. 아래 구분은 작성자가 안내하는 테스트 범위이며, 모든 기능이 기본 씬에 연결되어 있다는 의미는 아닙니다.
+
+| 구분 | 범위 |
+| --- | --- |
+| 기본 테스트 씬 확인 대상 | 플레이어 이동, 서버 기준 피해 처리·체력 동기화, 범용 스탯 구성 |
+| 추가 설정·연결 후 확인 | 액션 큐·쿨다운·실행 지연, 다중 히트박스, Friendly Fire, 서버 AI·액션 패턴, 스탯 Modifier, 스태미나, 상호작용 UI, 디버그 로그 |
+| 공개본에 협업자 구현 미포함 | 네트워크 커맨드 패턴에 의존하는 인벤토리 루팅·동기화 |
+| 배포 방식 | 소스·영상·스크린샷 제공 / 실행 빌드 미제공 |
+
+### 주요 패키지
+
+Netcode for GameObjects · Addressables · Cinemachine · Multiplayer Play Mode
+
+<a id="editor-tools"></a>
 
 ## Editor Tools
 
