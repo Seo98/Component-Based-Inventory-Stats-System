@@ -1,6 +1,6 @@
 # Component-Based-Inventory-Stats-System
 
-컴포넌트 기반 캐릭터 스탯, 네트워크 전투 및 그리드 인벤토리를 테스트하기 위한 Unity 프로젝트입니다.  
+컴포넌트 기반 캐릭터 스탯, 네트워크 전투 및 그리드 인벤토리를 테스트하기 위한 Unity 프로젝트입니다. 
 게임 데이터와 행동 설정은 ScriptableObject 중심으로 구성하며, 반복 작업을 줄이기 위한 전용 에디터 도구를 제공합니다.
 
 ## Essential Libraries
@@ -14,9 +14,12 @@
 
 ## Public Repository Scope
 
-팀 프로젝트에서는 네트워크 환경의 인벤토리 동기화 작업까지 완료했습니다. 다만 해당 기능이 의존하는 **네트워크 커맨드 패턴은 다른 작업자가 구현한 코드**이므로, 이 공개 저장소에서는 관련 스크립트를 제외했습니다.
+- 팀 프로젝트에서는 네트워크 환경의 인벤토리 동기화 작업까지 완료했습니다. 
+- 다만 해당 기능이 의존하는 **네트워크 커맨드 패턴은 다른 작업자가 구현한 코드**이므로, 이 공개 저장소에서는 관련 스크립트를 제외했습니다.
 
-따라서 이 저장소는 협업자의 네트워크 커맨드 패턴 구현을 포함하거나 제 작업으로 주장하지 않습니다. 현재 `MonsterRoot`는 `RPC`와 `NetworkList`를 이용해 루팅 데이터의 추가·제거를 확인하는 간단한 네트워크 테스트 용도입니다.
+- 따라서 이 저장소는 협업자의 네트워크 커맨드 패턴 구현을 포함하지 않습니다.
+- 그에따라, 네트워크 환경에서의 인벤토리 루팅등 작업등에 대해서는 추가 작업이 필요합니다.
+- 해당 코드로 작업된 예시 결과물 유튜브 링크를 통해 공유합니다
 
 ## Test Scene
 
@@ -64,6 +67,8 @@
 
 ### Item Database Editor
 
+<img width="1421" height="694" alt="image" src="https://github.com/user-attachments/assets/80820114-1dd8-4003-9f9c-a3c8c9384554" />
+
 실행 경로: `Tools > Item Database Editor`
 
 사용 방법:
@@ -84,6 +89,8 @@
 ### Action Hitbox Authoring Tool
 
 실행 경로: `Tools > Project G > Action Hitbox Authoring`
+
+<img width="1283" height="721" alt="image" src="https://github.com/user-attachments/assets/c9dcf7e9-3e14-4605-b0df-7e996f75c283" />
 
 사용 방법:
 
