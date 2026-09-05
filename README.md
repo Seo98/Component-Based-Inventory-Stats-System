@@ -118,8 +118,11 @@ This repository includes modified portions of a Grid Inventory implementation.
 
 The inventory implementation was adapted and extended for this project.
 
-### Character Stats Reference
+## References
 
-The character stat architecture was inspired by **Character Stats** by Kryzarel. No original package source files or assets are included or redistributed in this repository.
+The following resources were consulted as architectural and implementation references for this project.
 
-- [Character Stats - Unity Asset Store](https://assetstore.unity.com/packages/tools/utilities/character-stats-106351)
+- [Character Stats by Kryzarel - Unity Asset Store](https://assetstore.unity.com/packages/tools/utilities/character-stats-106351)
+- [Unity Multiplayer Samples Co-op - GitHub](https://github.com/Unity-Technologies/com.unity.multiplayer.samples.coop)
+
+No original package source files or assets from these references are included or redistributed in this repository.
