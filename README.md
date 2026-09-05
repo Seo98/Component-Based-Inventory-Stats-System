@@ -43,8 +43,14 @@
 
 #### Screenshots
 
+<<<<<<< Updated upstream
 
 
+=======
+| Gameplay | Inventory | Combat |
+| --- | --- | --- |
+| <img src="https://github.com/user-attachments/assets/fccd3e44-fb44-4902-ac78-12869e6cbc2b" alt="Gameplay" width="100%"> | <img src="https://github.com/user-attachments/assets/5e0507c2-9947-487c-a34f-ba899d851635" alt="Inventory" width="100%"> | <img src="https://github.com/user-attachments/assets/7ec98896-ccf7-481d-8d48-d1d0d1c97ed2" alt="Combat" width="100%"> |
+>>>>>>> Stashed changes
 
 ## Editor Tools
 
