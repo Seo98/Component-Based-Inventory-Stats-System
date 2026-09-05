@@ -138,6 +138,27 @@ Netcode for GameObjects · Addressables · Cinemachine · Multiplayer Play Mode
 
 ## Future Architecture Considerations
 
+### 의존성 탐색의 한계와 DI 개선 방향
+
+현재 코드에는 Inspector 참조 외에도 런타임 탐색으로 의존성을 확보하는 부분이 있습니다.
+
+- [PlayerInventoryEquipmentBridge](Assets/@Scripts/System/GridInventory/PlayerInventoryEquipmentBridge.cs)는 `GetComponent`로 입력·장비 컴포넌트를 얻고, 인벤토리 참조가 없으면 `FindFirstObjectByType<PlayerInventoryController>()`로 찾습니다.
+- [CharacterActionController](Assets/@Scripts/Character/Actions/CharacterActionController.cs)는 초기화 시 `GetComponent`로 스탯·팀·체력 컴포넌트를 확보하며, 네트워크 시간과 실행 상태에 `NetworkManager.Singleton`을 사용합니다.
+- [PlayerCameraLook](Assets/@Scripts/Player/Actions/PlayerCameraLook.cs)는 `Transform.Find("FollowTarget")`로 특정 이름의 자식 오브젝트를 찾습니다. 이는 씬 전체 탐색과는 다르지만 프리팹 계층·이름에 의존합니다.
+
+**개선 방향:** 프로젝트를 확장하거나 재사용할 때는 씬 탐색과 전역 접근으로 숨겨진 의존성을 명시적 주입으로 전환하는 것을 권장합니다. 특히 다중 플레이어 환경에서는 '먼저 발견한 인벤토리'가 아니라 해당 플레이어의 인벤토리가 연결되도록 생성·연결 책임을 분명히 해야 합니다.
+
+1. 고정된 Unity 오브젝트 참조는 우선 `[SerializeField]`로 명시하고 누락 여부를 검증합니다.
+2. 런타임 생성 객체는 생성 담당자나 Composition Root에서 `Initialize(...)` 등 수동 주입으로 필요한 참조를 전달합니다. 순수 C# 서비스는 생성자 주입을 우선 고려합니다.
+3. 연결 대상과 수명 관리가 복잡해지면 VContainer 등 DI 컨테이너를 선택적으로 도입하고, 네트워크 스폰·디스폰 시점과 객체 수명에 맞춰 구성합니다.
+
+`GetComponent` 자체를 일괄 제거하는 것이 목표는 아닙니다. 같은 오브젝트의 필수 컴포넌트를 초기화 때 한 번 조회해 캐시하는 방식은 유지할 수 있습니다. 충돌로 새로 만난 대상의 컴포넌트 조회처럼 동적인 탐색은 DI로 단순 대체하지 않고 별도로 판단합니다.
+
+DI의 목적은 **의존 관계·초기화 책임을 드러내고 테스트에서 대역을 주입하기 쉽게 만드는 것**입니다. 반복 탐색 비용은 호출 빈도와 Profiler 측정으로 판단하며, DI 도입만으로 성능 향상을 보장하지 않습니다. 위 내용은 현재 적용 완료 사항이 아닌 후속 리팩터링 방향입니다.
+
+### 선택적 라이브러리 도입
+
+
 현재 구조는 기능을 작은 컴포넌트로 분리하고, Inspector 참조와 이벤트를 통해 연결합니다. 
 프로젝트 규모가 커져 컴포넌트 간 의존성과 초기화 순서 관리가 복잡해질 경우 다음 방식을 선택적으로 검토할 수 있습니다.
 
