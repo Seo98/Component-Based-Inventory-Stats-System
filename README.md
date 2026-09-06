@@ -1,6 +1,6 @@
 <div align="center">
 
-# Component-Based Inventory & Stats
+# Unity Modular Inventory & Stats Framework
 ### Project G · Gameplay Systems Portfolio
 
 **서버 권한 전투 · 데이터 기반 스탯 · 그리드 인벤토리 · Unity Editor 도구**
